@@ -203,6 +203,16 @@ ADMIN_DASHBOARD_TEMPLATE = '''
             user-select: none;
         }
         .leads-table th:hover { background: #e2e8f0; }
+        .leads-table th.sort-asc::after {
+            content: ' ▲';
+            font-size: 12px;
+            color: #dc2626;
+        }
+        .leads-table th.sort-desc::after {
+            content: ' ▼';
+            font-size: 12px;
+            color: #dc2626;
+        }
         .leads-table td {
             padding: 8px 10px;
             border-bottom: 1px solid #f1f5f9;
@@ -331,6 +341,57 @@ ADMIN_DASHBOARD_TEMPLATE = '''
             </div>
         {% endif %}
     </div>
+
+    <script>
+        // Table sorting functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            function sortTable(table, column, asc = true) {
+                const dirModifier = asc ? 1 : -1;
+                const tBody = table.tBodies[0];
+                const rows = Array.from(tBody.querySelectorAll("tr"));
+
+                // Sort each row
+                const sortedRows = rows.sort((a, b) => {
+                    const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+                    const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+
+                    // Try to parse as number for value column (index 5)
+                    if (column === 5) {
+                        const aVal = parseFloat(aColText.replace(/[$,]/g, '')) || 0;
+                        const bVal = parseFloat(bColText.replace(/[$,]/g, '')) || 0;
+                        return aVal > bVal ? dirModifier : aVal < bVal ? -dirModifier : 0;
+                    }
+
+                    // String comparison for other columns
+                    return aColText > bColText ? dirModifier : aColText < bColText ? -dirModifier : 0;
+                });
+
+                // Remove all existing TRs from tbody
+                while (tBody.firstChild) {
+                    tBody.removeChild(tBody.firstChild);
+                }
+
+                // Re-add the newly sorted rows
+                tBody.append(...sortedRows);
+
+                // Update sort indicators
+                table.querySelectorAll("th").forEach(th => th.classList.remove("sort-asc", "sort-desc"));
+                table.querySelector(`th:nth-child(${column + 1})`).classList.toggle("sort-asc", asc);
+                table.querySelector(`th:nth-child(${column + 1})`).classList.toggle("sort-desc", !asc);
+            }
+
+            // Add click handlers to all table headers
+            document.querySelectorAll(".leads-table th").forEach(headerCell => {
+                headerCell.addEventListener("click", () => {
+                    const tableElement = headerCell.parentElement.parentElement.parentElement;
+                    const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
+                    const currentIsAscending = headerCell.classList.contains("sort-asc");
+
+                    sortTable(tableElement, headerIndex, !currentIsAscending);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 '''
