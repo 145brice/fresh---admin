@@ -12,10 +12,11 @@ import datetime
 app = Flask(__name__)
 
 # Configuration
-ADMIN_SECRET = 'admin123'
+ADMIN_SECRET = os.getenv('ADMIN_SECRET', 'admin123')
 CITIES = ['nashville', 'chattanooga', 'austin', 'sanantonio', 'houston', 'charlotte',
           'phoenix', 'dallas', 'raleigh', 'philadelphia', 'seattle', 'chicago']
-LEADS_PATH = '../contractor-leads-backend/leads'  # Path to leads data
+# Path to leads data - can be configured via environment variable
+LEADS_PATH = os.getenv('LEADS_PATH', '../contractor-leads-backend/leads')
 
 # Admin Login Template
 ADMIN_LOGIN_TEMPLATE = '''
