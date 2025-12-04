@@ -1,7 +1,7 @@
 🚀 Fresh Admin Dashboard starting on port 8083...
 📂 Reading leads from: /Users/briceleasure/Desktop/contractor-leads-backend/leads
 🔐 Admin URL: http://localhost:8083/admin?secret=admin123
- * Serving Flask app 'admin'
+ * Serving Flask app 'app'
  * Debug mode: on
 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on all addresses (0.0.0.0)
@@ -11,12 +11,49 @@
  * Restarting with watchdog (fsevents)
  * Debugger is active!
  * Debugger PIN: 448-680-534
-127.0.0.1 - - [04/Dec/2025 08:43:31] "GET /admin?secret=admin123 HTTP/1.1" 200 -
-127.0.0.1 - - [04/Dec/2025 08:43:31] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
- * Detected change in '/Users/briceleasure/Desktop/fresh-admin/admin.py', reloading
+127.0.0.1 - - [04/Dec/2025 09:01:41] "GET /admin?secret=admin123 HTTP/1.1" 200 -
+127.0.0.1 - - [04/Dec/2025 09:01:51] "GET /admin?secret=admin123&_nocache=1764860510 HTTP/1.1" 200 -
+127.0.0.1 - - [04/Dec/2025 09:01:58] "GET /admin?secret=admin123 HTTP/1.1" 200 -
+127.0.0.1 - - [04/Dec/2025 14:17:57] "GET /admin?secret=admin123&_nocache=1764860510 HTTP/1.1" 200 -
+127.0.0.1 - - [04/Dec/2025 14:18:03] "GET /admin?secret=admin123&_nocache=1764860510 HTTP/1.1" 200 -
+127.0.0.1 - - [04/Dec/2025 14:18:04] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [04/Dec/2025 14:18:07] "GET /admin?secret=admin123&_nocache=1764860510 HTTP/1.1" 200 -
+127.0.0.1 - - [04/Dec/2025 14:18:08] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+ * Detected change in '/Users/briceleasure/Desktop/fresh-admin/app.py.tmp.67992.1764879877805', reloading
+ * Detected change in '/Users/briceleasure/Desktop/fresh-admin/app.py', reloading
 🚀 Fresh Admin Dashboard starting on port 8083...
 📂 Reading leads from: /Users/briceleasure/Desktop/contractor-leads-backend/leads
 🔐 Admin URL: http://localhost:8083/admin?secret=admin123
 Error reading ../contractor-leads-backend/leads/austin/2025-11-27/2025-11-27_austin.csv: No columns to parse from file
+Error reading ../contractor-leads-backend/leads/austin/2025-11-27/2025-11-27_austin.csv: No columns to parse from file
+Error reading ../contractor-leads-backend/leads/austin/2025-11-27/2025-11-27_austin.csv: No columns to parse from file
+Error reading ../contractor-leads-backend/leads/austin/2025-11-27/2025-11-27_austin.csv: No columns to parse from file
+Error reading ../contractor-leads-backend/leads/austin/2025-11-27/2025-11-27_austin.csv: No columns to parse from file
+Error reading ../contractor-leads-backend/leads/austin/2025-11-27/2025-11-27_austin.csv: No columns to parse from file
  * Restarting with watchdog (fsevents)
-/Library/Developer/CommandLineTools/usr/bin/python3: can't open file '/Users/briceleasure/Desktop/fresh-admin/admin.py': [Errno 2] No such file or directory
+ * Debugger is active!
+ * Debugger PIN: 448-680-534
+ * Detected change in '/Users/briceleasure/Desktop/fresh-admin/app.py.tmp.67992.1764879936970', reloading
+ * Detected change in '/Users/briceleasure/Desktop/fresh-admin/app.py', reloading
+🚀 Fresh Admin Dashboard starting on port 8083...
+📂 Reading leads from: /Users/briceleasure/Desktop/contractor-leads-backend/leads
+🔐 Admin URL: http://localhost:8083/admin?secret=admin123
+ * Restarting with watchdog (fsevents)
+ * Debugger is active!
+ * Debugger PIN: 448-680-534
+ * Detected change in '/Users/briceleasure/Desktop/fresh-admin/app.py.tmp.67992.1764880001490', reloading
+ * Detected change in '/Users/briceleasure/Desktop/fresh-admin/app.py', reloading
+🚀 Fresh Admin Dashboard starting on port 8083...
+📂 Reading leads from: /Users/briceleasure/Desktop/contractor-leads-backend/leads
+🔐 Admin URL: http://localhost:8083/admin?secret=admin123
+ * Restarting with watchdog (fsevents)
+ * Debugger is active!
+ * Debugger PIN: 448-680-534
+ * Detected change in '/Users/briceleasure/Desktop/fresh-admin/app.py.tmp.67992.1764880031548', reloading
+ * Detected change in '/Users/briceleasure/Desktop/fresh-admin/app.py', reloading
+🚀 Fresh Admin Dashboard starting on port 8083...
+📂 Reading leads from: /Users/briceleasure/Desktop/contractor-leads-backend/leads
+🔐 Admin URL: http://localhost:8083/admin?secret=admin123
+ * Restarting with watchdog (fsevents)
+ * Debugger is active!
+ * Debugger PIN: 448-680-534

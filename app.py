@@ -172,6 +172,20 @@ ADMIN_DASHBOARD_TEMPLATE = '''
             border: 1px solid #e2e8f0;
             border-radius: 8px;
             overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .city-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .city-card.active {
+            border: 2px solid #dc2626;
+            box-shadow: 0 4px 12px rgba(220,38,38,0.3);
+        }
+        .city-card.active .city-header {
+            background: #dc2626;
+            color: white;
         }
         .city-header {
             background: #f8fafc;
@@ -184,6 +198,31 @@ ADMIN_DASHBOARD_TEMPLATE = '''
             padding: 10px 15px;
             display: flex;
             justify-content: space-between;
+            font-size: 14px;
+        }
+        .filter-controls {
+            padding: 15px 20px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .filter-btn {
+            padding: 8px 16px;
+            background: #dc2626;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .filter-btn:hover {
+            background: #b91c1c;
+        }
+        .filter-label {
+            color: #64748b;
             font-size: 14px;
         }
 
@@ -280,10 +319,10 @@ ADMIN_DASHBOARD_TEMPLATE = '''
         </div>
 
         <div class="section">
-            <div class="section-header">📊 City Overview</div>
+            <div class="section-header">📊 City Overview - Click a city to filter results</div>
             <div class="city-grid">
                 {% for city, data in cities_data.items() %}
-                <div class="city-card">
+                <div class="city-card" data-city="{{ city }}" onclick="filterByCity('{{ city }}')">
                     <div class="city-header">{{ city.title() }}</div>
                     <div class="city-stats">
                         <span>{{ data.leads|length }} leads</span>
@@ -296,13 +335,17 @@ ADMIN_DASHBOARD_TEMPLATE = '''
 
         {% if all_leads %}
         <div class="section">
+            <div class="filter-controls">
+                <span class="filter-label">Showing: <strong id="activeFilter">All Cities</strong></span>
+                <button class="filter-btn" onclick="showAllCities()">Show All Cities</button>
+            </div>
             <div class="section-header">📋 All Leads by Date</div>
             {% for date, cities in all_leads.items() %}
             <div style="margin-bottom: 30px;">
                 <h3 style="padding: 15px 20px; background: #f8fafc; margin: 0; border-bottom: 1px solid #e2e8f0;">{{ date }}</h3>
 
                 {% for city, leads in cities.items() %}
-                <div style="border-left: 4px solid #dc2626; background: #fef2f2; margin: 10px 20px;">
+                <div class="city-leads-section" data-city="{{ city }}" style="border-left: 4px solid #dc2626; background: #fef2f2; margin: 10px 20px;">
                     <div style="padding: 10px 15px; font-weight: 600; color: #dc2626;">{{ city.title() }} ({{ leads|length }} leads)</div>
 
                     <table class="leads-table">
@@ -343,6 +386,48 @@ ADMIN_DASHBOARD_TEMPLATE = '''
     </div>
 
     <script>
+        // City filtering functionality
+        function filterByCity(cityName) {
+            // Remove active class from all city cards
+            document.querySelectorAll('.city-card').forEach(card => {
+                card.classList.remove('active');
+            });
+
+            // Add active class to clicked city card
+            document.querySelector(`.city-card[data-city="${cityName}"]`).classList.add('active');
+
+            // Hide all city sections
+            document.querySelectorAll('.city-leads-section').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show only selected city's sections
+            document.querySelectorAll(`.city-leads-section[data-city="${cityName}"]`).forEach(section => {
+                section.style.display = 'block';
+            });
+
+            // Update filter label
+            document.getElementById('activeFilter').textContent = cityName.charAt(0).toUpperCase() + cityName.slice(1);
+
+            // Scroll to leads section
+            document.querySelector('.city-leads-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function showAllCities() {
+            // Remove active class from all city cards
+            document.querySelectorAll('.city-card').forEach(card => {
+                card.classList.remove('active');
+            });
+
+            // Show all city sections
+            document.querySelectorAll('.city-leads-section').forEach(section => {
+                section.style.display = 'block';
+            });
+
+            // Update filter label
+            document.getElementById('activeFilter').textContent = 'All Cities';
+        }
+
         // Table sorting functionality
         document.addEventListener('DOMContentLoaded', function() {
             function sortTable(table, column, asc = true) {
